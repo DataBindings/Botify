@@ -1,0 +1,28 @@
+{
+  "name": "botify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DataBindings/Botify.git"
+  },
+  "author": "DataBindings",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DataBindings/Botify/issues"
+  },
+  "homepage": "https://github.com/DataBindings/Botify#readme",
+  "dependencies": {
+    "discord.js": "^14.11.0",
+    "dotenv": "^16.3.1",
+    "jest": "^29.6.1",
+    "nodemon": "^3.0.1"
+  }
+}

@@ -36,7 +36,7 @@ const getAccessToken = async (clientId, clientSecret, refreshToken) => {
   });
 
   // Ensure the response is valid; otherwise, throw errors
-  if (!response.ok) {
+  if (!response.ok && response.status !== 400) {
     throw new Error("Failed to retrieve Spotify access token: Network Error");
   }
 

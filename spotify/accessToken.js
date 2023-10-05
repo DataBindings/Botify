@@ -1,5 +1,5 @@
 import querystring from "node:querystring";
-import 'dotenv/config'
+import 'dotenv/config';
 
 /**
  * Retrieves a Spotify access token using the provided refresh token.
@@ -12,12 +12,8 @@ import 'dotenv/config'
  * @throws    {Error} If there's an issue with the network request or the response.
  * @returns   {Promise<object>} A Promise that resolves to an object containing the access token.
  */
-const getAccessToken = async () => {
+const getAccessToken = async (clientId, clientSecret, refreshToken) => {
   try {
-    // Get the required credentials and refresh token from environment variables
-    const clientId = process.env.SPOTIFY_CLIENT_ID;
-    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-    const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN;
 
     // Spotify Accounts API endpoint URL
     const url = `https://accounts.spotify.com/api/token`;

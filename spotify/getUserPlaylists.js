@@ -36,9 +36,6 @@ const getUserPlaylists = async (token, limit = 20, offset = 0) => {
     },
   });
 
-  // Parse the response data as JSON.
-  const data = await response.json();
-
   // Check for errors in the API response and handle accordingly.
   if (!response.ok) {
     // Different error messages are thrown based on the response status code.
@@ -56,6 +53,9 @@ const getUserPlaylists = async (token, limit = 20, offset = 0) => {
       throw new Error("Failed to list Spotify playlists: Unknown error");
     }
   }
+
+  // Parse the response data as JSON.
+  const data = await response.json();
 
   // Return the retrieved playlist data.
   return data;

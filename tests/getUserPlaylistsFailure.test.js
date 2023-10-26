@@ -1,21 +1,11 @@
 import fetchMock from "jest-fetch-mock";
-import getAccessToken from "../spotify/accessToken.js";
 import getUserPlaylists from "../spotify/getUserPlaylists.js";
 
 fetchMock.enableMocks();
 
-describe('getUserPlaylists', () => {
+describe('GetUserPlaylistsFailure', () => {
   afterEach(() => {
     fetchMock.resetMocks();
-  });
-
-  it('should return playlist data when the request is successful', async () => {
-    const clientId = process.env.SPOTIFY_CLIENT_ID;
-    const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-    const refreshToken = process.env.SPOTIFY_REFRESH_TOKEN;
-    const { access_token } = await getAccessToken(clientId, clientSecret, refreshToken);
-    const { items } = await getUserPlaylists(access_token, 10, 0);
-    await expect(items.length).toEqual(expect.any(Number));
   });
 
   it('should throw an error for an incorrect access token (401)', async () => {

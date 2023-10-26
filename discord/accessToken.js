@@ -1,4 +1,5 @@
 import { Client, Events, GatewayIntentBits } from "discord.js";
+import 'dotenv/config';
 
 /**
  * Retrieves a Discord bot token and logs in to the Discord API using the provided token.

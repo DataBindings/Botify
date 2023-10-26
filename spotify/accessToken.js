@@ -24,38 +24,35 @@ const getAccessToken = async (clientId, clientSecret, refreshToken) => {
 
   // Make an HTTP POST request to obtain a new access token
   const response = await fetch(url, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      Authorization: `Basic ${basic}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Authorization": `Basic ${basic}`,
+      "Content-Type": "application/x-www-form-urlencoded",
     },
     body: querystring.stringify({
-      grant_type: 'refresh_token',
+      grant_type: "refresh_token",
       refresh_token: refreshToken,
     }),
   });
 
-  // Ensure the response is valid; otherwise, throw errors
-  if (!response.ok && response.status !== 400) {
-    throw new Error("Failed to retrieve Spotify access token: Network Error");
+  // Check for errors in the API response and handle accordingly.
+  if (!response.ok) {
+    // Different error messages are thrown based on the response status code.
+    if (response.status === 400) {
+      throw new Error("Failed to obtain Spotify access token: Invalid client id, secret, or refresh token");
+    } else if (response.status === 429) {
+      throw new Error("Failed to obtain Spotify access token: Rate limit exceeded");
+    } else if (response.status >= 500) {
+      throw new Error("Failed to obtain Spotify access token: Server error");
+    } else {
+      throw new Error("Failed to obtain Spotify access token: Unknown error");
+    }
   }
 
-  // Ensure the response is in JSON format and return the parsed JSON data
+  // Parse the response data as JSON.
   const responseData = await response.json();
 
-  // Handle specific error cases and throw errors with corresponding messages
-  if (responseData.error_description === "Invalid client") {
-    throw new Error("Failed to retrieve Spotify access token: incorrect client id");
-  }
-
-  if (responseData.error_description === "Invalid client secret") {
-    throw new Error("Failed to retrieve Spotify access token: incorrect client secret");
-  }
-
-  if (responseData.error_description === "Invalid refresh token") {
-    throw new Error("Failed to retrieve Spotify access token: incorrect refresh token");
-  }
-
+  // Return the JSON response data.
   return responseData;
 }
 
